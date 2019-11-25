@@ -13,17 +13,17 @@ import ProviderViewModel from '../BaseLayerPicker/ProviderViewModel.js';
      */
     function createDefaultImageryProviderViewModels() {
         var providerViewModels = [];
-        providerViewModels.push(new ProviderViewModel({
-            name : 'Bing Maps Aerial',
-            iconUrl : buildModuleUrl('Widgets/Images/ImageryProviders/bingAerial.png'),
-            tooltip : 'Bing Maps aerial imagery, provided by Cesium ion',
-            category: 'Cesium ion',
-            creationFunction : function() {
-                return createWorldImagery({
-                    style : IonWorldImageryStyle.AERIAL
-                });
-            }
-        }));
+        // providerViewModels.push(new ProviderViewModel({
+        //     name : 'Bing Maps Aerial',
+        //     iconUrl : buildModuleUrl('Widgets/Images/ImageryProviders/bingAerial.png'),
+        //     tooltip : 'Bing Maps aerial imagery, provided by Cesium ion',
+        //     category: 'Cesium ion',
+        //     creationFunction : function() {
+        //         return createWorldImagery({
+        //             style : IonWorldImageryStyle.AERIAL
+        //         });
+        //     }
+        // }));
 
         providerViewModels.push(new ProviderViewModel({
             name : 'Bing Maps Aerial with Labels',

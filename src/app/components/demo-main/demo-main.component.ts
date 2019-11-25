@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as Cesium from 'cesium';
+import * as Cesium from '../../../assets/cesium';
 @Component({
   selector: 'app-demo-main',
   templateUrl: './demo-main.component.html',
@@ -8,7 +8,7 @@ import * as Cesium from 'cesium';
 export class DemoMainComponent implements OnInit {
   viewer = new Cesium.Viewer('cesiumContainer', {
     animation: false,//是否创建动画小器件，左下角仪表
-    baseLayerPicker: false,//是否显示图层选择器
+    baseLayerPicker: true,//是否显示图层选择器
     fullscreenButton: false,//是否显示全屏按钮
     geocoder: false,//是否显示geocoder小器件，右上角查询按钮
     homeButton: false,//是否显示Home按钮
@@ -19,12 +19,16 @@ export class DemoMainComponent implements OnInit {
     navigationHelpButton: false,//是否显示右上角的帮助按钮
     scene3DOnly: true,//如果设置为true，则所有几何图形以3D模式绘制以节约GPU资源
     clock: new Cesium.Clock(),//用于控制当前时间的时钟对象
-  });
-  // .imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider({ // 增加谷歌影像底图
-  //   url: 'http://www.google.cn/maps/vt?lyrs=s&x={x}&y={y}&z={z}',
-  //   tilingScheme: new Cesium.WebMercatorTilingScheme()
-  // })
-  // );
+    // baseLayerPicker: false
+  })
+    // .imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider({ // 增加谷歌影像底图
+    //   // url: 'http://www.google.cn/maps/vt?lyrs=s&x={x}&y={y}&z={z}',
+    //   url: '../../../assets/maps/{z}/{x}/{y}.png',
+    //   // tilingScheme: new Cesium.WebMercatorTilingScheme()
+    //   fileExtension: 'png',
+    // })
+    // )
+    ;
   czml = [{
     "id": "document",
     "name": "CZML Geometries: Polyline",
@@ -142,7 +146,7 @@ export class DemoMainComponent implements OnInit {
   // entity = new Cesium.Entity('cesiumContainer');
   infoBox = new Cesium.InfoBox('cesiumContainer');
   constructor() { }
-
+  // ngOnInit() { }
   ngOnInit() {
 
     this.viewer._cesiumWidget._creditContainer.style.display = 'none';
@@ -206,5 +210,12 @@ export class DemoMainComponent implements OnInit {
       '<tr><th>' + "经度" + '</th><td>' + 222 + '</td></tr>' +
       '<tr><th>' + "纬度" + '</th><td>' + 333 + '</td></tr>' +
       '</tbody></table>';
+      this.viewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider({ // 增加谷歌影像底图
+        // url: 'http://www.google.cn/maps/vt?lyrs=s&x={x}&y={y}&z={z}',
+        url: '../../../assets/maps/{z}/{x}/{y}.png',
+        // tilingScheme: new Cesium.WebMercatorTilingScheme()
+        fileExtension: 'png',
+      })
+      );
   }
 }
